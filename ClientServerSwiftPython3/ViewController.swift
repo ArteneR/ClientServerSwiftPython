@@ -29,13 +29,84 @@ class ViewController: UIViewController, NSStreamDelegate {
     //Data received
     var buffer = [UInt8](count: 200, repeatedValue: 0)
     
+    
+    class Message {
+        var operation: String
+        var direction: String
+ 
+        init(operation: String, direction: String) {
+            self.operation = operation
+            self.direction = direction
+        }
+        
+        func setDirection(direction: String) {
+            self.direction = direction
+        }
+
+        func setOperation(operation: String) {
+            self.operation = operation
+        }
+        
+        func getMessage() -> String {
+            return "\(operation):\(direction)"
+        }
+    }
+    
+    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.handleSwipes(_:)))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.handleSwipes(_:)))
+        let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.handleSwipes(_:)))
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.handleSwipes(_:)))
+        
+        leftSwipe.direction = .Left
+        rightSwipe.direction = .Right
+        upSwipe.direction = .Up
+        downSwipe.direction = .Down
+        
+        view.addGestureRecognizer(leftSwipe)
+        view.addGestureRecognizer(rightSwipe)
+        view.addGestureRecognizer(upSwipe)
+        view.addGestureRecognizer(downSwipe)
         
         ButtonSetup()
         
         LabelSetup()
     }
+    
+    
+    func handleSwipes(sender: UISwipeGestureRecognizer) {
+        var data : NSData
+        print("Swiping...");
+        
+        if (sender.direction == .Left) {
+            print("Swiped left")
+            let messageToSend = Message(operation: "SWIPE", direction: "LEFT")
+            data = messageToSend.getMessage().dataUsingEncoding(NSUTF8StringEncoding)!
+        }
+        else if (sender.direction == .Right) {
+            print("Swiped right")
+            let messageToSend = Message(operation: "SWIPE", direction: "RIGHT")
+            data = messageToSend.getMessage().dataUsingEncoding(NSUTF8StringEncoding)!
+        }
+        else if (sender.direction == .Up) {
+            print("Swiped up")
+            let messageToSend = Message(operation: "SWIPE", direction: "UP")
+            data = messageToSend.getMessage().dataUsingEncoding(NSUTF8StringEncoding)!
+        }
+        else {
+            print("Swiped down")
+            let messageToSend = Message(operation: "SWIPE", direction: "DOWN")
+            data = messageToSend.getMessage().dataUsingEncoding(NSUTF8StringEncoding)!
+        }
+        
+        outStream?.write(UnsafePointer<UInt8>(data.bytes), maxLength: data.length)
+    }
+    
+    
     
     //Button Functions
     func ButtonSetup() {
@@ -76,6 +147,8 @@ class ViewController: UIViewController, NSStreamDelegate {
         let data : NSData = "Quit".dataUsingEncoding(NSUTF8StringEncoding)!
         outStream?.write(UnsafePointer<UInt8>(data.bytes), maxLength: data.length)
     }
+    
+    
     //Label setup function
     func LabelSetup() {
         label = UILabel(frame: CGRectMake(0,0,300,150))
