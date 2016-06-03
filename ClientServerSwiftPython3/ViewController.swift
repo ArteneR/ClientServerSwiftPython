@@ -19,7 +19,7 @@ class ViewController: UIViewController, NSStreamDelegate {
     var labelConnection : UILabel!
     
     //Socket server
-    let addr = "192.168.146.1"
+    let addr = "192.168.0.106"
     let port = 9876
     
     //Network variables
@@ -43,21 +43,21 @@ class ViewController: UIViewController, NSStreamDelegate {
         buttonConnect.setTitle("Connect to server", forState: UIControlState.Normal)
         buttonConnect.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
         buttonConnect.setTitleColor(UIColor.cyanColor(), forState: UIControlState.Highlighted)
-        buttonConnect.addTarget(self, action: "btnConnectPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        buttonConnect.addTarget(self, action: #selector(ViewController.btnConnectPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         view.addSubview(buttonConnect)
         
         let buttoniPhone = UIButton(frame: CGRectMake(20, 100, 300, 30))
         buttoniPhone.setTitle("Send \"This is iPhone\"", forState: UIControlState.Normal)
         buttoniPhone.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
         buttoniPhone.setTitleColor(UIColor.cyanColor(), forState: UIControlState.Highlighted)
-        buttoniPhone.addTarget(self, action: "btniPhonePressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        buttoniPhone.addTarget(self, action: #selector(ViewController.btniPhonePressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         view.addSubview(buttoniPhone)
         
         let buttonQuit = UIButton(frame: CGRectMake(20, 150, 300, 30))
         buttonQuit.setTitle("Send \"Quit\"", forState: UIControlState.Normal)
         buttonQuit.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
         buttonQuit.setTitleColor(UIColor.cyanColor(), forState: UIControlState.Highlighted)
-        buttonQuit.addTarget(self, action: "btnQuitPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        buttonQuit.addTarget(self, action: #selector(ViewController.btnQuitPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         view.addSubview(buttonQuit)
     }
     
