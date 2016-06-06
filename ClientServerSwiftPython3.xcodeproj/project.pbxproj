@@ -14,6 +14,9 @@
 		55514C3F1CEBA92700896788 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55514C3D1CEBA92700896788 /* LaunchScreen.storyboard */; };
 		55514C4A1CEBA92700896788 /* ClientServerSwiftPython3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55514C491CEBA92700896788 /* ClientServerSwiftPython3Tests.swift */; };
 		55514C551CEBA92700896788 /* ClientServerSwiftPython3UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55514C541CEBA92700896788 /* ClientServerSwiftPython3UITests.swift */; };
+		55C88EC31D03100D00E52C45 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 55C88EC21D03100D00E52C45 /* images */; };
+		55C88EC51D031F9500E52C45 /* OptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C88EC41D031F9500E52C45 /* OptionsController.swift */; };
+		55C88EC71D03203100E52C45 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C88EC61D03203100E52C45 /* MainController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,9 @@
 		55514C501CEBA92700896788 /* ClientServerSwiftPython3UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClientServerSwiftPython3UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55514C541CEBA92700896788 /* ClientServerSwiftPython3UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientServerSwiftPython3UITests.swift; sourceTree = "<group>"; };
 		55514C561CEBA92700896788 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55C88EC21D03100D00E52C45 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = SOURCE_ROOT; };
+		55C88EC41D031F9500E52C45 /* OptionsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsController.swift; sourceTree = "<group>"; };
+		55C88EC61D03203100E52C45 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,8 +105,11 @@
 			children = (
 				55514C341CEBA92700896788 /* AppDelegate.swift */,
 				55514C361CEBA92700896788 /* ViewController.swift */,
+				55C88EC41D031F9500E52C45 /* OptionsController.swift */,
+				55C88EC61D03203100E52C45 /* MainController.swift */,
 				55514C381CEBA92700896788 /* Main.storyboard */,
 				55514C3B1CEBA92700896788 /* Assets.xcassets */,
+				55C88EC21D03100D00E52C45 /* images */,
 				55514C3D1CEBA92700896788 /* LaunchScreen.storyboard */,
 				55514C401CEBA92700896788 /* Info.plist */,
 			);
@@ -193,6 +202,7 @@
 				TargetAttributes = {
 					55514C301CEBA92700896788 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = QR865432MA;
 					};
 					55514C441CEBA92700896788 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -229,6 +239,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55C88EC31D03100D00E52C45 /* images in Resources */,
 				55514C3F1CEBA92700896788 /* LaunchScreen.storyboard in Resources */,
 				55514C3C1CEBA92700896788 /* Assets.xcassets in Resources */,
 				55514C3A1CEBA92700896788 /* Main.storyboard in Resources */,
@@ -256,7 +267,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55C88EC71D03203100E52C45 /* MainController.swift in Sources */,
 				55514C371CEBA92700896788 /* ViewController.swift in Sources */,
+				55C88EC51D031F9500E52C45 /* OptionsController.swift in Sources */,
 				55514C351CEBA92700896788 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -401,10 +414,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ClientServerSwiftPython3/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.artener.ClientServerSwiftPython3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -412,10 +428,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ClientServerSwiftPython3/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.artener.ClientServerSwiftPython3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -484,6 +503,7 @@
 				55514C5B1CEBA92700896788 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		55514C5C1CEBA92700896788 /* Build configuration list for PBXNativeTarget "ClientServerSwiftPython3Tests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +512,7 @@
 				55514C5E1CEBA92700896788 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		55514C5F1CEBA92700896788 /* Build configuration list for PBXNativeTarget "ClientServerSwiftPython3UITests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +521,7 @@
 				55514C611CEBA92700896788 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
