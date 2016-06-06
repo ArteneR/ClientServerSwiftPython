@@ -39,7 +39,8 @@ class MainController: UIViewController, NSStreamDelegate {
         
         init(operation: String, direction: String) {
             self.operation = operation
-            self.direction = direction
+            let trimmedDirection = String(direction.characters.filter{!"\n\r".characters.contains($0)})
+            self.direction = trimmedDirection
         }
         
         func setDirection(direction: String) {
@@ -80,7 +81,8 @@ class MainController: UIViewController, NSStreamDelegate {
             var splittedData = packed_data.characters.split{$0 == ":"}.map(String.init)
             let op: String = splittedData[0]
             let param: String = splittedData[1]
-            let message: Message = Message(operation: op, direction: param)
+            let trimmedParam = String(param.characters.filter{!"\n\r".characters.contains($0)})
+            let message: Message = Message(operation: op, direction: trimmedParam)
             return message
         }
     
@@ -286,22 +288,24 @@ class MainController: UIViewController, NSStreamDelegate {
             if aStream == inStream {
                 inStream!.read(&buffer, maxLength: buffer.count)
                 let bufferStr = NSString(bytes: &buffer, length: buffer.count, encoding: NSUTF8StringEncoding)
+               
                 
                 let responseMessage : Message = marshaller.unmarshal(bufferStr as! String)
                 print("operation: \(responseMessage.getOperation())")
                 print("direction: \(responseMessage.getDirection())")
                 
-                if (responseMessage.getOperation() == "SWITCH_TO_SCREEN") {
-                    // Go to next ViewController
-                    if (responseMessage.getDirection() == "MOVIES_LIBRARY") {
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let vc = storyboard.instantiateViewControllerWithIdentifier("MoviesLibraryController") as UIViewController
-                        self.navigationController?.pushViewController(vc, animated: true)
-                    }
-                }
+                let respOperation = responseMessage.getOperation()
+                let respDirection = responseMessage.getDirection()
                 
-                label.text = bufferStr! as String
-                print(bufferStr!)
+                if (respOperation == "SWITCH_TO_SCREEN") {
+                    print("here1 \(respDirection)\(respDirection)")
+                    
+                    print("Opened new view controller")
+                    let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+                    let vc : UIViewController = storyboard.instantiateViewControllerWithIdentifier("MoviesLibraryController") as UIViewController
+                    self.presentViewController(vc, animated: true, completion: nil)
+                    print("Opened2 new view controller")
+                }
             }
             
         case NSStreamEvent.HasSpaceAvailable:
@@ -315,6 +319,12 @@ class MainController: UIViewController, NSStreamDelegate {
             print("Unknown")
         }
     }
+
+        
+        
+        
+        
+        
 
     
     

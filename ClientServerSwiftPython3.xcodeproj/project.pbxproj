@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55167F771D05EA9700471252 /* MoviesLibraryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55167F761D05EA9700471252 /* MoviesLibraryController.swift */; };
 		55514C351CEBA92700896788 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55514C341CEBA92700896788 /* AppDelegate.swift */; };
 		55514C371CEBA92700896788 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55514C361CEBA92700896788 /* ViewController.swift */; };
 		55514C3A1CEBA92700896788 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55514C381CEBA92700896788 /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		55167F761D05EA9700471252 /* MoviesLibraryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesLibraryController.swift; sourceTree = "<group>"; };
 		55514C311CEBA92700896788 /* ClientServerSwiftPython3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClientServerSwiftPython3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55514C341CEBA92700896788 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55514C361CEBA92700896788 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				55514C361CEBA92700896788 /* ViewController.swift */,
 				55C88EC41D031F9500E52C45 /* OptionsController.swift */,
 				55C88EC61D03203100E52C45 /* MainController.swift */,
+				55167F761D05EA9700471252 /* MoviesLibraryController.swift */,
 				55514C381CEBA92700896788 /* Main.storyboard */,
 				55514C3B1CEBA92700896788 /* Assets.xcassets */,
 				55C88EC21D03100D00E52C45 /* images */,
@@ -271,6 +274,7 @@
 				55514C371CEBA92700896788 /* ViewController.swift in Sources */,
 				55C88EC51D031F9500E52C45 /* OptionsController.swift in Sources */,
 				55514C351CEBA92700896788 /* AppDelegate.swift in Sources */,
+				55167F771D05EA9700471252 /* MoviesLibraryController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
