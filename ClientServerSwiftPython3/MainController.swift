@@ -5,6 +5,38 @@ var addrFromOptionsView = String()
 var portFromOptionsView = String()
 
 
+func closeMovieWindow() {
+    print("close movie window message")
+    var data : NSData
+    let messageToSend = Message(operation: "CLOSE_MOVIE")
+    data = messageToSend.getMessage().dataUsingEncoding(NSUTF8StringEncoding)!
+    outStream?.write(UnsafePointer<UInt8>(data.bytes), maxLength: data.length)
+}
+
+
+func openMenuWindow() {
+    print("open menu message")
+    var data : NSData
+    let messageToSend = Message(operation: "OPEN_MOVIES_MENU")
+    data = messageToSend.getMessage().dataUsingEncoding(NSUTF8StringEncoding)!
+    outStream?.write(UnsafePointer<UInt8>(data.bytes), maxLength: data.length)
+}
+
+
+func playPauseMovie() {
+    print("sending play/pause message")
+    var data : NSData
+    let messageToSend = Message(operation: "PLAY_PAUSE_MOVIE")
+    data = messageToSend.getMessage().dataUsingEncoding(NSUTF8StringEncoding)!
+    outStream?.write(UnsafePointer<UInt8>(data.bytes), maxLength: data.length)
+}
+
+
+//Network variables
+var inStream : NSInputStream?
+var outStream: NSOutputStream?
+
+
 class MainController: UIViewController, NSStreamDelegate {
     
     //Button
@@ -18,75 +50,13 @@ class MainController: UIViewController, NSStreamDelegate {
     var addr: String = "192.168.0.106"
     var port: Int = 9050
     
-    
-    //Network variables
-    var inStream : NSInputStream?
-    var outStream: NSOutputStream?
-    
     //Data received
     var buffer = [UInt8](count: 200, repeatedValue: 0)
     
     var marshaller = Marshallar()
     
     
-    class Message {
-        var operation: String = ""
-        var direction: String = ""
-        
-        init(operation: String) {
-            self.operation = operation
-        }
-        
-        init(operation: String, direction: String) {
-            self.operation = operation
-            let trimmedDirection = String(direction.characters.filter{!"\n\r".characters.contains($0)})
-            self.direction = trimmedDirection
-        }
-        
-        func setDirection(direction: String) {
-            self.direction = direction
-        }
-        
-        func setOperation(operation: String) {
-            self.operation = operation
-        }
-        
-        func getDirection() -> String {
-            return self.direction
-        }
-        
-        func getOperation() -> String {
-            return self.operation
-        }
-        
-        func getMessage() -> String {
-            if (direction.isEmpty) {
-                return "\(operation):"
-            }
-            else {
-                return "\(operation):\(direction)"
-            }
-        }
-        
-    }
     
-    
-    class Marshallar {
-        
-        func marshal(operation: String, parameter: String) -> String {
-            return "\(operation):\(parameter)"
-        }
-        
-        func unmarshal(packed_data: String) -> Message {
-            var splittedData = packed_data.characters.split{$0 == ":"}.map(String.init)
-            let op: String = splittedData[0]
-            let param: String = splittedData[1]
-            let trimmedParam = String(param.characters.filter{!"\n\r".characters.contains($0)})
-            let message: Message = Message(operation: op, direction: trimmedParam)
-            return message
-        }
-    
-    }
     
 
     
@@ -297,7 +267,18 @@ class MainController: UIViewController, NSStreamDelegate {
                 let respOperation = responseMessage.getOperation()
                 let respDirection = responseMessage.getDirection()
                 
-                if (respOperation == "SWITCH_TO_SCREEN") {
+                
+                if (respOperation == "SWITCH_TO_SCREEN1") {
+                    print("Opened new view controller 1")
+                    //let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+                    //let vc : UIViewController = storyboard.instantiateViewControllerWithIdentifier("MainController") as UIViewController
+                    //self.presentViewController(vc, animated: true, completion: nil)
+                    navigationController?.popViewControllerAnimated(true)
+                    print("Opened2 new view controller 1")
+                }
+                
+                if (respOperation == "SWITCH_TO_SCREEN2") {
+                    // Temp sol with Switch_to_screen2, because comparing with respDirection doesn't work :|
                     print("here1 \(respDirection)\(respDirection)")
                     
                     print("Opened new view controller")
@@ -320,13 +301,69 @@ class MainController: UIViewController, NSStreamDelegate {
         }
     }
 
-        
-        
-        
-        
-        
 
     
+}
+
+
+class Message {
+    var operation: String = ""
+    var direction: String = ""
     
+    init(operation: String) {
+        self.operation = operation
+    }
+    
+    init(operation: String, direction: String) {
+        self.operation = operation
+        let trimmedDirection = String(direction.characters.filter{!"\n\r".characters.contains($0)})
+        self.direction = trimmedDirection
+    }
+    
+    func setDirection(direction: String) {
+        self.direction = direction
+    }
+    
+    func setOperation(operation: String) {
+        self.operation = operation
+    }
+    
+    func getDirection() -> String {
+        return self.direction
+    }
+    
+    func getOperation() -> String {
+        return self.operation
+    }
+    
+    func getMessage() -> String {
+        if (direction.isEmpty) {
+            return "\(operation):"
+        }
+        else {
+            return "\(operation):\(direction)"
+        }
+    }
     
 }
+
+
+class Marshallar {
+    
+    func marshal(operation: String, parameter: String) -> String {
+        return "\(operation):\(parameter)"
+    }
+    
+    func unmarshal(packed_data: String) -> Message {
+        var splittedData = packed_data.characters.split{$0 == ":"}.map(String.init)
+        let op: String = splittedData[0]
+        let param: String = splittedData[1]
+        let trimmedParam = String(param.characters.filter{!"\n\r".characters.contains($0)})
+        let message: Message = Message(operation: op, direction: trimmedParam)
+        return message
+    }
+    
+}
+
+
+
