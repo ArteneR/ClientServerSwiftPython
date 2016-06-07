@@ -15,6 +15,7 @@
 		55514C3F1CEBA92700896788 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55514C3D1CEBA92700896788 /* LaunchScreen.storyboard */; };
 		55514C4A1CEBA92700896788 /* ClientServerSwiftPython3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55514C491CEBA92700896788 /* ClientServerSwiftPython3Tests.swift */; };
 		55514C551CEBA92700896788 /* ClientServerSwiftPython3UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55514C541CEBA92700896788 /* ClientServerSwiftPython3UITests.swift */; };
+		55655D1A1D06D42200DCB89D /* DownloadMoviesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55655D191D06D42200DCB89D /* DownloadMoviesController.swift */; };
 		55C88EC31D03100D00E52C45 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 55C88EC21D03100D00E52C45 /* images */; };
 		55C88EC51D031F9500E52C45 /* OptionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C88EC41D031F9500E52C45 /* OptionsController.swift */; };
 		55C88EC71D03203100E52C45 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C88EC61D03203100E52C45 /* MainController.swift */; };
@@ -52,6 +53,7 @@
 		55514C501CEBA92700896788 /* ClientServerSwiftPython3UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClientServerSwiftPython3UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55514C541CEBA92700896788 /* ClientServerSwiftPython3UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientServerSwiftPython3UITests.swift; sourceTree = "<group>"; };
 		55514C561CEBA92700896788 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55655D191D06D42200DCB89D /* DownloadMoviesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadMoviesController.swift; sourceTree = "<group>"; };
 		55C88EC21D03100D00E52C45 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = SOURCE_ROOT; };
 		55C88EC41D031F9500E52C45 /* OptionsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsController.swift; sourceTree = "<group>"; };
 		55C88EC61D03203100E52C45 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				55C88EC41D031F9500E52C45 /* OptionsController.swift */,
 				55C88EC61D03203100E52C45 /* MainController.swift */,
 				55167F761D05EA9700471252 /* MoviesLibraryController.swift */,
+				55655D191D06D42200DCB89D /* DownloadMoviesController.swift */,
 				55514C381CEBA92700896788 /* Main.storyboard */,
 				55514C3B1CEBA92700896788 /* Assets.xcassets */,
 				55C88EC21D03100D00E52C45 /* images */,
@@ -272,6 +275,7 @@
 			files = (
 				55C88EC71D03203100E52C45 /* MainController.swift in Sources */,
 				55514C371CEBA92700896788 /* ViewController.swift in Sources */,
+				55655D1A1D06D42200DCB89D /* DownloadMoviesController.swift in Sources */,
 				55C88EC51D031F9500E52C45 /* OptionsController.swift in Sources */,
 				55514C351CEBA92700896788 /* AppDelegate.swift in Sources */,
 				55167F771D05EA9700471252 /* MoviesLibraryController.swift in Sources */,

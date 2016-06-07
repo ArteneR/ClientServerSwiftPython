@@ -32,6 +32,33 @@ func playPauseMovie() {
 }
 
 
+func downloadMovie(torrentURL: String, torrentMagnetLink: String) {
+    print("Downloading movie...passing torrent link to server")
+    
+    if (!torrentURL.isEmpty) {
+        print("Torrent URL: \(torrentURL)")
+        
+        
+    }
+    else if (!torrentMagnetLink.isEmpty) {
+        print("Torrent Magnet Link: \(torrentMagnetLink)")
+        
+        
+    }
+    
+}
+
+
+func closeDownloadMoviesWindow() {
+    print("close download moview window message")
+    var data : NSData
+    let messageToSend = Message(operation: "CLOSE_DOWNLOAD_MOVIES")
+    data = messageToSend.getMessage().dataUsingEncoding(NSUTF8StringEncoding)!
+    outStream?.write(UnsafePointer<UInt8>(data.bytes), maxLength: data.length)
+}
+
+
+
 //Network variables
 var inStream : NSInputStream?
 var outStream: NSOutputStream?
@@ -48,7 +75,7 @@ class MainController: UIViewController, NSStreamDelegate {
     
     //Socket server
     var addr: String = "192.168.0.106"
-    var port: Int = 9050
+    var port: Int = 9060
     
     //Data received
     var buffer = [UInt8](count: 200, repeatedValue: 0)
@@ -269,24 +296,38 @@ class MainController: UIViewController, NSStreamDelegate {
                 
                 
                 if (respOperation == "SWITCH_TO_SCREEN1") {
-                    print("Opened new view controller 1")
+                    print("Opening new view controller 1")
                     //let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
                     //let vc : UIViewController = storyboard.instantiateViewControllerWithIdentifier("MainController") as UIViewController
                     //self.presentViewController(vc, animated: true, completion: nil)
                     navigationController?.popViewControllerAnimated(true)
-                    print("Opened2 new view controller 1")
+                    print("Opened new view controller 1")
                 }
+                
                 
                 if (respOperation == "SWITCH_TO_SCREEN2") {
                     // Temp sol with Switch_to_screen2, because comparing with respDirection doesn't work :|
-                    print("here1 \(respDirection)\(respDirection)")
+                    print("here2 \(respDirection)\(respDirection)")
                     
-                    print("Opened new view controller")
+                    print("Opening new view controller 2")
                     let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
                     let vc : UIViewController = storyboard.instantiateViewControllerWithIdentifier("MoviesLibraryController") as UIViewController
                     self.presentViewController(vc, animated: true, completion: nil)
-                    print("Opened2 new view controller")
+                    print("Opened new view controller 2")
                 }
+                
+                
+                if (respOperation == "SWITCH_TO_SCREEN3") {
+                    // Temp sol with Switch_to_screen3, because comparing with respDirection doesn't work :|
+                    print("here3 \(respDirection)\(respDirection)")
+                    
+                    print("Opening new view controller 3")
+                    let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+                    let vc : UIViewController = storyboard.instantiateViewControllerWithIdentifier("DownloadMoviesController") as UIViewController
+                    self.presentViewController(vc, animated: true, completion: nil)
+                    print("Opened new view controller 3")
+                }
+
             }
             
         case NSStreamEvent.HasSpaceAvailable:
