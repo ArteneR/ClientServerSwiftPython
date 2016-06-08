@@ -18,8 +18,14 @@ class DownloadMoviesController: UIViewController {
         closeDownloadMoviesWindow()
     }
     
-    @IBAction func clickedDownload(sender: AnyObject) {
+    @IBAction func clickedDownload(sender: UIButton) {
+        self.torrentURL.resignFirstResponder()
+        self.torrentMagnetLink.resignFirstResponder()
         downloadMovie(torrentURL.text!, torrentMagnetLink: torrentMagnetLink.text!)
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
 }

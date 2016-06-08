@@ -16,9 +16,15 @@ class OptionsController: UIViewController {
         
     }
     
+    
     @IBAction func pressedConfirmBtn(sender: AnyObject) {
         addrFromOptionsView = server_ip.text!
         portFromOptionsView = server_port.text!
+    }
+    
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
     }
 
 }

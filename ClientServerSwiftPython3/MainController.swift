@@ -37,12 +37,18 @@ func downloadMovie(torrentURL: String, torrentMagnetLink: String) {
     
     if (!torrentURL.isEmpty) {
         print("Torrent URL: \(torrentURL)")
-        
+        var data : NSData
+        let messageToSend = Message(operation: "DOWNLOAD_MOVIE", direction: "BY_TORRENT_URL<:>\(torrentURL)")
+        data = messageToSend.getMessage().dataUsingEncoding(NSUTF8StringEncoding)!
+        outStream?.write(UnsafePointer<UInt8>(data.bytes), maxLength: data.length)
         
     }
     else if (!torrentMagnetLink.isEmpty) {
         print("Torrent Magnet Link: \(torrentMagnetLink)")
-        
+        var data : NSData
+        let messageToSend = Message(operation: "DOWNLOAD_MOVIE", direction: "BY_TORRENT_MAGNET<:>\(torrentMagnetLink)")
+        data = messageToSend.getMessage().dataUsingEncoding(NSUTF8StringEncoding)!
+        outStream?.write(UnsafePointer<UInt8>(data.bytes), maxLength: data.length)
         
     }
     
@@ -75,7 +81,7 @@ class MainController: UIViewController, NSStreamDelegate {
     
     //Socket server
     var addr: String = "192.168.0.106"
-    var port: Int = 9060
+    var port: Int = 9080
     
     //Data received
     var buffer = [UInt8](count: 200, repeatedValue: 0)
@@ -304,7 +310,7 @@ class MainController: UIViewController, NSStreamDelegate {
                     print("Opened new view controller 1")
                 }
                 
-                
+                print("middle")
                 if (respOperation == "SWITCH_TO_SCREEN2") {
                     // Temp sol with Switch_to_screen2, because comparing with respDirection doesn't work :|
                     print("here2 \(respDirection)\(respDirection)")
@@ -329,6 +335,7 @@ class MainController: UIViewController, NSStreamDelegate {
                 }
 
             }
+            print("end has bytes available")
             
         case NSStreamEvent.HasSpaceAvailable:
             print("HasSpaceAvailable")
@@ -379,26 +386,34 @@ class Message {
     
     func getMessage() -> String {
         if (direction.isEmpty) {
-            return "\(operation):"
+            return "\(operation)<<::>>"
         }
         else {
-            return "\(operation):\(direction)"
+            return "\(operation)<<::>>\(direction)"
         }
     }
     
 }
 
+import Foundation
 
 class Marshallar {
     
     func marshal(operation: String, parameter: String) -> String {
-        return "\(operation):\(parameter)"
+        return "\(operation)<<::>>\(parameter)"
     }
     
     func unmarshal(packed_data: String) -> Message {
-        var splittedData = packed_data.characters.split{$0 == ":"}.map(String.init)
-        let op: String = splittedData[0]
-        let param: String = splittedData[1]
+        //var splittedData = packed_data.characters.split{$0 == ":"}.map(String.init)
+        var splittedData = packed_data.componentsSeparatedByString("<<::>>")
+        var op: String = ""
+        var param: String = ""
+        if (!splittedData[0].isEmpty) {
+            op = splittedData[0]
+        }
+        if (splittedData.count >= 2 && !splittedData[1].isEmpty) {
+            param = splittedData[1]
+        }
         let trimmedParam = String(param.characters.filter{!"\n\r".characters.contains($0)})
         let message: Message = Message(operation: op, direction: trimmedParam)
         return message
